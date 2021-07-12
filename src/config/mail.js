@@ -1,12 +1,12 @@
 export default {
-  host: "smtp.mailtrap.io",
-  post: 2525,
-  secure: false,
+  host: process.env.MAIL_HOST,
+  post: process.env.MAIL_PORT,
+  secure: process.env.MAIL_SECURE,
   auth: {
-    user: "90af2edfa4f10a",
-    pass: "efb2a11ebf7b05",
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS,
   },
   default: {
-    from: "Equipe Mind <noreply@casemce.com>",
+    from: process.env.MAIL_FROM,
   },
 };

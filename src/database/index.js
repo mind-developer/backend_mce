@@ -24,14 +24,11 @@ class Database {
   }
 
   mongo() {
-    this.mongoConnection = mongoose.connect(
-      "mongodb+srv://mce_user:mce_password@clustermce.tjfgs.mongodb.net/mongo_mce",
-      {
-        useNewUrlParser: true, // Formato novo na string de conexão
-        useFindAndModify: true, // Buscar e atualizar os registros
-        useUnifiedTopology: true, // Resolver DeprecationWarning do console caso apareça
-      }
-    );
+    this.mongoConnection = mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true, // Formato novo na string de conexão
+      useFindAndModify: true, // Buscar e atualizar os registros
+      useUnifiedTopology: true, // Resolver DeprecationWarning do console caso apareça
+    });
   }
 }
 export default new Database();
