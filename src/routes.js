@@ -23,6 +23,7 @@ routes.post("/sessions", SessionController.store);
 routes.use(authMiddleware);
 
 routes.put("/users", UserController.update);
+routes.put("/usersPhoto", UserController.updatePhoto);
 
 routes.get("/providers", ProviderController.index);
 routes.get("/providers/:providerId/available", AvailableController.index);

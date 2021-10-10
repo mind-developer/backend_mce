@@ -69,6 +69,37 @@ class UserController {
 
     return res.json({ id, name, phone, email, avatar });
   }
+
+  async updatePhoto(req, res) {
+    try {
+      const schema = Yup.object().shape({ avatar_id: Yup.number() });
+
+      if (!(await schema.isValid(req.body)))
+        return res.status(400).json({ error: "Validation fails" });
+
+      const user = await User.findByPk(req.userId);
+
+      await user.update(req.body);
+
+      const { id, name, phone, email, avatar } = await User.findByPk(
+        req.userId,
+        {
+          include: [
+            {
+              model: File,
+              as: "avatar",
+              attributes: ["id", "path", "url"],
+            },
+          ],
+        }
+      );
+
+      return res.json({ id, name, phone, email, avatar });
+    } catch (err) {
+      console.log(err);
+      return res.status(400).json({ error: err.message });
+    }
+  }
 }
 
 export default new UserController();
